@@ -44,15 +44,17 @@ names(mergeddata) <- gsub("\\(","",names(mergeddata))
 names(mergeddata) <- gsub("\\)","",names(mergeddata))
 names(mergeddata) <- gsub("\\,","",names(mergeddata))
 
-##merge the test and training datasets
+##order the data set
 mergeddata <- mergeddata[order(mergeddata$activity,mergeddata$subject),]
 
 ##create and add a unique id for each record composing of category, activity and subject number
 id <- paste0(mergeddata$category,mergeddata$activity,mergeddata$subject)
 mergeddata <- cbind(id,mergeddata)
 
-##create a tidy data set with the average of each variable for each activity and each subject 
+##create a final tidy data set with the average of each variable for each activity and each subject 
 averageddata <- ddply(mergeddata,.(id),function(x){ cbind(x[1,1:4],as.list(colMeans(x[,5:ncol(x)]))) })
 
-## order the data set
+## order the final data set for the output
 averageddata <- averageddata[order(averageddata$activity,averageddata$subject),]
+
+
