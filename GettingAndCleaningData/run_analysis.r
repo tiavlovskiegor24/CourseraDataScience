@@ -18,9 +18,12 @@ trainlabels <- read.table("./GettindAndCleaningData/UCI HAR Dataset/train/y_trai
 testsubjects <- read.table("./GettindAndCleaningData/UCI HAR Dataset/test/subject_test.txt",col.names = c("subject"))#,stringsAsFactors = FALSE)
 trainsubjects <- read.table("./GettindAndCleaningData/UCI HAR Dataset/train/subject_train.txt",col.names = c("subject"))#,stringsAsFactors = FALSE)
 
-## Assign activity names to lables
+## Assign activity names to lables and tidy the names
 testlabels$activity <- sapply(testlabels$V1,function(x) {tolower(activitylabels$V2[activitylabels$V1==x])}) 
+testlabels$activity <- gsub("_","",testlabels$activity)
 trainlabels$activity <- sapply(trainlabels$V1,function(x) {tolower(activitylabels$V2[activitylabels$V1==x])}) 
+trainlabels$activity <- gsub("_","",trainlabels$activity)
+
 
 ## Creat category columns: test and training
 testcategories <- sample("test",size = nrow(xtest),replace = TRUE)
