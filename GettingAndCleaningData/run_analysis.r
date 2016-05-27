@@ -19,9 +19,9 @@ testsubjects <- read.table("./GettindAndCleaningData/UCI HAR Dataset/test/subjec
 trainsubjects <- read.table("./GettindAndCleaningData/UCI HAR Dataset/train/subject_train.txt",col.names = c("subject"))#,stringsAsFactors = FALSE)
 
 ## Assign activity names to lables and tidy the names
-testlabels$activity <- sapply(testlabels$V1,function(x) {tolower(activitylabels$V2[activitylabels$V1==x])}) 
+testlabels$activity <- tolower(activitylabels[testlabels$V1,2])
 testlabels$activity <- gsub("_","",testlabels$activity)
-trainlabels$activity <- sapply(trainlabels$V1,function(x) {tolower(activitylabels$V2[activitylabels$V1==x])}) 
+trainlabels$activity <- tolower(activitylabels[trainlabels$V1,2])
 trainlabels$activity <- gsub("_","",trainlabels$activity)
 
 
